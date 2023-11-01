@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoices</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.min.css">
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <h1>Invoices</h1>
+    <hr>
+
+    <table>
+        <thead>
+            <tr>
+                <th class="center">Invoice #</th>
+                <th class="center">Amount</th>
+                <th class="center">Status</th>
+                <th class="center">Due Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for invoice in invoices %}
+                <tr>
+                    <td class="center">{{ invoice.invoiceNumber }}</td>
+                    <td class="center">{{ invoice.amount | format_currency('USD') }}</td>
+                    <td class="center">
+                        {{ invoice.status }}
+                    </td>
+                    <td class="center">{{ invoice.dueDate is empty ? 'N/A' : invoice.dueDate | date('Y-m-d') }}</td>
+                </tr>
+            {% else %}
+                <tr class="center"><td colspan="4">No invoices Found</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

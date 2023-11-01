@@ -1,0 +1,61 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: php
+      dockerfile: Dockerfile
+    container_name: amc-app
+    restart: unless-stopped
+    working_dir: /var/www/
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    volumes:
+      - ../app:/var/www
+
+  web:
+    image: nginx:alpine
+    container_name: amc-web
+    restart: unless-stopped
+    ports:
+      - 80:80
+    volumes:
+      - ../app:/var/www
+      - ./nginx:/etc/nginx/conf.d
+
+  db:
+    container_name: amc-db
+    image: mariadb:latest
+    restart: unless-stopped
+    volumes:
+      - mysqldata:/var/lib/mysql
+    env_file:
+      - .env
+    ports:
+      - 3306:3306
+
+  dbms:
+    image: adminer
+    restart: unless-stopped
+    ports:
+      - 8080:8080
+
+  mailhog:
+    container_name: amc-mailhog
+    image: mailhog/mailhog
+    restart: unless-stopped
+    logging:
+      driver: "none"
+    ports:
+      - 8025:8025
+      - 1025:1025
+
+  job:
+    container_name: amc-job
+    build: 
+      context: cron
+    volumes:
+      - ../app:/var/www
+      - ./log/cron:/var/log/cron
+volumes:
+  mysqldata: {}

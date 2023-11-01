@@ -1,0 +1,33 @@
+.green {
+    color: green;
+    text-align: center;
+}
+
+.red {
+    color: red;
+    text-align: center;
+}
+
+.orange {
+    color: orange;
+    text-align: center;
+}
+
+.yellow {
+    color: yellow;
+    text-align: center;
+}
+
+.gray {
+    color: grey;
+    text-align: center;
+}
+
+.table-footer {
+    font-weight: bold;
+    text-align: right;
+}
+
+.center {
+    text-align: center;
+}
