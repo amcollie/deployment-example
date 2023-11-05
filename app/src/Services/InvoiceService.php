@@ -4,30 +4,23 @@ declare(strict_types=1);
 
 namespace App\Services;
 
-use App\Contracts\PaymentGatewayInterface;
+use App\Entities\Invoice;
+use App\Enums\InvoiceStatus;
+use Doctrine\ORM\EntityManager;
 
 class InvoiceService
 {
-    // public function __construct(
-    //     protected SalesTaxService $salesTaxService,
-    //     protected PaymentGatewayInterface $paymentGateway,
-    //     protected EmailService $emailService
-    // )
-    // {
+    public function __construct(private EntityManager $em) {}
 
-    // }
+    public function getPaidInvoices(): array
+    {
 
-    // public function process(array $customer, float $amount): bool
-    // {
-
-    //     $tax = $this->salesTaxService->calculate($amount, $customer);
-
-    //     if (!$this->paymentGateway->charge($customer, $amount, $tax)) {
-    //         return false;
-    //     }
-
-    //     $this->emailService->send($customer, 'receipt');
-    //     echo 'Invoice has been processed<br/>';
-    //     return true;
-    // }
+        return $this->em->createQueryBuilder()
+            ->select("i")
+            ->from(Invoice::class, 'i')
+            ->where ('i.status = :status')
+            ->setParameter('status', InvoiceStatus::PAID)
+            ->getQuery()
+            ->getArrayResult();
+    }
 }

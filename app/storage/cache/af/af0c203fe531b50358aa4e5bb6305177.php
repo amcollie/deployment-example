@@ -13,7 +13,7 @@ use Twig\Source;
 use Twig\Template;
 
 /* invoices/index.twig */
-class __TwigTemplate_4263634e2e91e1978b814e90c7f6f36a extends Template
+class __TwigTemplate_bfc060ca0ce85a47bd6c3ade400891f3 extends Template
 {
     private $source;
     private $macros = [];
@@ -52,50 +52,43 @@ class __TwigTemplate_4263634e2e91e1978b814e90c7f6f36a extends Template
             <tr>
                 <th class=\"center\">Invoice #</th>
                 <th class=\"center\">Amount</th>
-                <th class=\"center\">Status</th>
                 <th class=\"center\">Due Date</th>
             </tr>
         </thead>
         <tbody>
             ";
-        // line 24
+        // line 23
         $context['_parent'] = $context;
         $context['_seq'] = twig_ensure_traversable(($context["invoices"] ?? null));
         $context['_iterated'] = false;
         foreach ($context['_seq'] as $context["_key"] => $context["invoice"]) {
-            // line 25
+            // line 24
             echo "                <tr>
                     <td class=\"center\">";
+            // line 25
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["invoice"], "invoiceNumber", [], "any", false, false, false, 25), "html", null, true);
+            echo "</td>
+                    <td class=\"center\">";
             // line 26
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["invoice"], "invoiceNumber", [], "any", false, false, false, 26), "html", null, true);
+            echo twig_escape_filter($this->env, $this->extensions['Twig\Extra\Intl\IntlExtension']->formatCurrency(twig_get_attribute($this->env, $this->source, $context["invoice"], "amount", [], "any", false, false, false, 26), "USD"), "html", null, true);
             echo "</td>
                     <td class=\"center\">";
             // line 27
-            echo twig_escape_filter($this->env, $this->extensions['Twig\Extra\Intl\IntlExtension']->formatCurrency(twig_get_attribute($this->env, $this->source, $context["invoice"], "amount", [], "any", false, false, false, 27), "USD"), "html", null, true);
-            echo "</td>
-                    <td class=\"center\">
-                        ";
-            // line 29
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["invoice"], "status", [], "any", false, false, false, 29), "html", null, true);
-            echo "
-                    </td>
-                    <td class=\"center\">";
-            // line 31
-            ((twig_test_empty(twig_get_attribute($this->env, $this->source, $context["invoice"], "dueDate", [], "any", false, false, false, 31))) ? (print ("N/A")) : (print (twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["invoice"], "dueDate", [], "any", false, false, false, 31), "Y-m-d"), "html", null, true))));
+            ((twig_test_empty(twig_get_attribute($this->env, $this->source, $context["invoice"], "dueDate", [], "any", false, false, false, 27))) ? (print ("N/A")) : (print (twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["invoice"], "dueDate", [], "any", false, false, false, 27), "Y-m-d"), "html", null, true))));
             echo "</td>
                 </tr>
             ";
             $context['_iterated'] = true;
         }
         if (!$context['_iterated']) {
-            // line 34
+            // line 30
             echo "                <tr class=\"center\"><td colspan=\"4\">No invoices Found</td></tr>
             ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['invoice'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 36
+        // line 32
         echo "        </tbody>
     </table>
 </body>
@@ -114,7 +107,7 @@ class __TwigTemplate_4263634e2e91e1978b814e90c7f6f36a extends Template
 
     public function getDebugInfo()
     {
-        return array (  99 => 36,  92 => 34,  84 => 31,  79 => 29,  74 => 27,  70 => 26,  67 => 25,  62 => 24,  37 => 1,);
+        return array (  92 => 32,  85 => 30,  77 => 27,  73 => 26,  69 => 25,  66 => 24,  61 => 23,  37 => 1,);
     }
 
     public function getSourceContext()

@@ -4,20 +4,16 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
-use App\Attributes\Get;
-use App\Services\InvoiceService;
-use App\View;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Slim\Views\Twig;
 
 class HomeController
 {
-    public function __construct(private InvoiceService $invoiceService)
-    {
-    }
+    public function __construct(private readonly Twig $twig) {}
 
-    #[Get('/')]
-    public function index(): View
+    public function index(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {
-        $this->invoiceService->process([], 25);
-        return View::make('index');
+        return $this->twig->render($response, 'index.twig');
     }
 }

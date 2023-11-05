@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace App;
 
+/**
+ * @property-read ?array $db
+ * @property-read ?string $environment
+ */
 class Config
 {
     public array $config = [];
@@ -13,13 +17,10 @@ class Config
         $this->config = [
             'db' => [
                 'host' => $env['DB_HOST'],
-                'username' => $env['DB_USER'],
+                'user' => $env['DB_USER'],
                 'password' => $env['DB_PASS'],
-                'database' => $env['DB_NAME'],
-                'driver' => $env['DB_DRIVER'] ?? 'mysql',
-                'charset' => 'utf8',
-                'collation' => 'utf8_unicode_ci',
-                'prefix' => '',
+                'dbname' => $env['DB_NAME'],
+                'driver' => $env['DB_DRIVER'] ?? 'pdo_mysql',
             ],
             'mailer' => [
                 'dsn' => $env['EMAIL_DSN'] ?? '',
@@ -28,6 +29,7 @@ class Config
                 'emailable' => $env['EMAILABLE_API_KEY'] ?? '',
                 'abstractApi' => $env['ABSTRACT_API_KEY'] ?? '',
             ],
+            'environment' => $env['ENVIRONMENT'] ?? 'production',
         ];
     }
 

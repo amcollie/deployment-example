@@ -12,7 +12,7 @@ return [
     ],
 
     'migrations_paths' => [
-        'Migrations' => '/migrations',
+        'Migrations' => dirname(__DIR__) . '/migrations',
     ],
 
     'all_or_nothing' => true,
